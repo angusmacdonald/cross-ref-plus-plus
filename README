@@ -1,0 +1,5 @@
+A re-implementation of Word's cross-reference function, which allows you to add cross references for items such as tables, figures, numbered headings and equations.
+
+This implementation is designed to be easier to use, by making various options easier to select, and allowing it to be displayed as a task pane rather than a pop-up window.
+
+Contact: Angus Macdonald (angus AT cs.st-andrews.ac.uk)

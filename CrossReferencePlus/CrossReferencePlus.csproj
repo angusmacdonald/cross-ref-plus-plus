@@ -176,6 +176,7 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="CrossReferenceHandler.cs" />
     <Compile Include="CrossReferenceRibbon.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -57,7 +57,6 @@
             // 
             this.getCrossReferences.Label = "Get Cross-References";
             this.getCrossReferences.Name = "getCrossReferences";
-            this.getCrossReferences.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.getCrossReferences_Click);
             // 
             // CrossReferenceRibbon
             // 

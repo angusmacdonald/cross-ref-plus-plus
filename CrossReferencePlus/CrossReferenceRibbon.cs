@@ -18,34 +18,7 @@ namespace CrossReferencePlus
             createListPane();
         }
 
-        private void getCrossReferences_Click(object sender, RibbonControlEventArgs e)
-        {
-            Microsoft.Office.Interop.Word.Application app = Globals.ThisAddIn.Application;
-
-            Document doc = app.ActiveDocument;
-
-            //Get possible cross-references
-            object referenceType = "Figure"; // Get heading cross-references
-            WdReferenceKind contextOfReference = WdReferenceKind.wdEntireCaption; //e.g. full label, number, page, etc...
-
-            object crossReferenceItems = doc.GetCrossReferenceItems(ref referenceType);
-
-            Array arrayOfCrossReferenceItems = (Array)crossReferenceItems;
-
-            listPane.addReferenceList(arrayOfCrossReferenceItems);
-
-
-            if (arrayOfCrossReferenceItems.Length > 0)
-            {
-
-                // take the last one, because it was just added before
-
-                object itemToCrossReference = arrayOfCrossReferenceItems.Length; //reference item to use.
-
-                app.Selection.InsertCrossReference(ref referenceType, contextOfReference, ref itemToCrossReference);
-            }
-        }
-
+        
         public void createListPane()
         {
             listPane = new ListPane();
@@ -57,7 +30,7 @@ namespace CrossReferencePlus
                 Globals.ThisAddIn.CustomTaskPanes.Remove(customTaskPane);
             }
 
-            customTaskPane = Globals.ThisAddIn.CustomTaskPanes.Add(listPane, "Frequency Analyzer Results");
+            customTaskPane = Globals.ThisAddIn.CustomTaskPanes.Add(listPane, "Cross Reference Plus");
             customTaskPane.Visible = true;
         }
 

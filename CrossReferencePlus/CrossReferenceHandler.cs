@@ -57,7 +57,8 @@ namespace CrossReferencePlus
         /// Key: The current reference type (whatever the contents of 'referenceType' are.
         /// Value: position in currentCrossReferenceItems array.
         /// </summary>
-        Dictionary<object, int> positionHistory = new Dictionary<object, int>();
+        Dictionary<object, int> referencePositionHistory = new Dictionary<object, int>();
+        Dictionary<object, int> referenceTypePositionHistory = new Dictionary<object, int>();
 
         public CrossReferenceHandler()
         {
@@ -99,70 +100,9 @@ namespace CrossReferencePlus
             }
             else
             {
-                throw new Exception("Internal error: the index of cross reference items doesn't match with the index given by addCrossReference." +
-                    "\ncurrentCrossReferenceItems size: " + currentCrossReferenceItems.Length + "; index = " + i);
+               // throw new Exception("Internal error: the index of cross reference items doesn't match with the index given by addCrossReference." +
+                 //   "\ncurrentCrossReferenceItems size: " + currentCrossReferenceItems.Length + "; index = " + i);
             }
-        }
-
-        /// <summary>
-        /// Get the list of possible display options as strings, to be displayed in the task pane.
-        /// </summary>
-        /// <returns></returns>
-        internal List<String> getDisplayOptions()
-        {
-           listOfOptions.Clear();
-           listOfOptionsAsString.Clear();
-            
-
-            //Only figures, tables, equations.
-            if ( isACaptionedType()){
-                listOfOptions.Add( WdReferenceKind.wdOnlyLabelAndNumber);
-                listOfOptionsAsString.Add( "Only Label and Number");
-
-                listOfOptions.Add( WdReferenceKind.wdEntireCaption);
-                listOfOptionsAsString.Add( "Entire Caption");
-                listOfOptions.Add( WdReferenceKind.wdOnlyCaptionText);
-                listOfOptionsAsString.Add( "Only Caption");
-  
-            }
-
-            if (referenceType.Equals(WdReferenceType.wdRefTypeNumberedItem))
-            {
-                listOfOptions.Add(WdReferenceKind.wdNumberNoContext);
-                listOfOptionsAsString.Add("Number No Context");
-                listOfOptions.Add(WdReferenceKind.wdNumberFullContext);
-                listOfOptionsAsString.Add("Number Full Context");
-                //listOfOptions.Add(WdReferenceKind.wdNumberRelativeContext);
-                //listOfOptionsAsString.Add("Number Relative Context");
-            }
-            
-            //Only endnotes.
-            if (referenceType.Equals(WdReferenceType.wdRefTypeEndnote))
-            {
-                listOfOptions.Add(WdReferenceKind.wdEndnoteNumber);
-                listOfOptionsAsString.Add("Endnote Number");
-                listOfOptions.Add(WdReferenceKind.wdEndnoteNumberFormatted);
-                listOfOptionsAsString.Add("Endnote Number Formatted");
-            }
-
-            //Only footnotes.
-            if (referenceType.Equals(WdReferenceType.wdRefTypeFootnote))
-            {
-                listOfOptions.Add(WdReferenceKind.wdFootnoteNumber);
-                listOfOptionsAsString.Add("Footnote Number");
-                listOfOptions.Add(WdReferenceKind.wdFootnoteNumberFormatted);
-                listOfOptionsAsString.Add("Footnote Number Formatted");
-            }
-
-            //All
-            listOfOptions.Add(WdReferenceKind.wdPageNumber);
-            listOfOptionsAsString.Add("Page Number");
-            listOfOptions.Add(WdReferenceKind.wdContentText);
-            listOfOptionsAsString.Add("Content Text");
-            listOfOptions.Add(WdReferenceKind.wdPosition);
-            listOfOptionsAsString.Add("Position");
-
-            return listOfOptionsAsString;
         }
 
         /// <summary>
@@ -189,10 +129,12 @@ namespace CrossReferencePlus
             return referenceType.Equals("Figure") || referenceType.Equals("Table") || referenceType.Equals("Equation");
         }
 
-        internal void setCurrentSelectedItem(int index)
+        internal void setCurrentSelectedItem(int refIndex, int typeIndex)
         {
-            positionHistory.Remove(referenceType);
-            positionHistory.Add(referenceType, index);
+            referencePositionHistory.Remove(referenceType);
+            referencePositionHistory.Add(referenceType, refIndex);
+            referenceTypePositionHistory.Remove(referenceType);
+            referenceTypePositionHistory.Add(referenceType, typeIndex);
         }
 
         /// <summary>
@@ -203,9 +145,9 @@ namespace CrossReferencePlus
         /// <returns></returns>
         internal int getPreviouslySelectedIndex()
         {
-            if (positionHistory.ContainsKey(referenceType))
+            if (referencePositionHistory.ContainsKey(referenceType))
             {
-                return positionHistory[referenceType];
+                return referencePositionHistory[referenceType];
             }
             else
             {
@@ -213,5 +155,79 @@ namespace CrossReferencePlus
             }
 
         }
+
+        internal int getPreviouslySelectedIndexForType()
+        {
+            if (referenceTypePositionHistory.ContainsKey(referenceType))
+            {
+                return referenceTypePositionHistory[referenceType];
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
+
+        /// <summary>
+        /// Get the list of possible display options as strings, to be displayed in the task pane.
+        /// </summary>
+        /// <returns></returns>
+        internal List<String> getDisplayOptions()
+        {
+            listOfOptions.Clear();
+            listOfOptionsAsString.Clear();
+
+
+            //Only figures, tables, equations.
+            if (isACaptionedType())
+            {
+                listOfOptions.Add(WdReferenceKind.wdOnlyLabelAndNumber);
+                listOfOptionsAsString.Add("Only Label and Number");
+
+                listOfOptions.Add(WdReferenceKind.wdEntireCaption);
+                listOfOptionsAsString.Add("Entire Caption");
+                listOfOptions.Add(WdReferenceKind.wdOnlyCaptionText);
+                listOfOptionsAsString.Add("Only Caption");
+
+            }
+
+            if (referenceType.Equals(WdReferenceType.wdRefTypeNumberedItem))
+            {
+                listOfOptions.Add(WdReferenceKind.wdNumberNoContext);
+                listOfOptionsAsString.Add("Number No Context");
+                listOfOptions.Add(WdReferenceKind.wdNumberFullContext);
+                listOfOptionsAsString.Add("Number Full Context");
+                //listOfOptions.Add(WdReferenceKind.wdNumberRelativeContext);
+                //listOfOptionsAsString.Add("Number Relative Context");
+            }
+
+            //Only endnotes.
+            if (referenceType.Equals(WdReferenceType.wdRefTypeEndnote))
+            {
+                listOfOptions.Add(WdReferenceKind.wdEndnoteNumber);
+                listOfOptionsAsString.Add("Endnote Number");
+                listOfOptions.Add(WdReferenceKind.wdEndnoteNumberFormatted);
+                listOfOptionsAsString.Add("Endnote Number Formatted");
+            }
+
+            //Only footnotes.
+            if (referenceType.Equals(WdReferenceType.wdRefTypeFootnote))
+            {
+                listOfOptions.Add(WdReferenceKind.wdFootnoteNumber);
+                listOfOptionsAsString.Add("Footnote Number");
+                listOfOptions.Add(WdReferenceKind.wdFootnoteNumberFormatted);
+                listOfOptionsAsString.Add("Footnote Number Formatted");
+            }
+
+            //All
+            listOfOptions.Add(WdReferenceKind.wdPageNumber);
+            listOfOptionsAsString.Add("Page Number");
+            listOfOptions.Add(WdReferenceKind.wdPosition);
+            listOfOptionsAsString.Add("Position");
+
+            return listOfOptionsAsString;
+        }
+
     }
 }

@@ -35,9 +35,9 @@ namespace CrossReferencePlus
             
             addNewReferences();
 
-            setIndexToPrevious();
-
             updateDisplayOptions();
+            
+            setIndexToPrevious();
 
         }
 
@@ -72,6 +72,7 @@ namespace CrossReferencePlus
 
         private void setIndexToPrevious()
         {
+            //References List
             if (referencesList.Items.Count > 0)
             {
             
@@ -88,6 +89,24 @@ namespace CrossReferencePlus
             
                 referencesList.SetSelected(indexToUse, true);
             }
+
+            //References Type List
+            if (bDisplayOption.Items.Count > 0)
+            {
+
+                //Set index to its previous position if still valid.
+                int previousIndex = handler.getPreviouslySelectedIndexForType();
+
+                int indexToUse = 0;
+
+                if (previousIndex > 0 && previousIndex < bDisplayOption.Items.Count)
+                {
+                    indexToUse = previousIndex;
+                }
+
+
+                bDisplayOption.SetSelected(indexToUse, true);
+            }
         }
 
         private void bAddCrossReference_Click(object sender, EventArgs e)
@@ -103,7 +122,7 @@ namespace CrossReferencePlus
             handler.addCrossReference(referencesList.SelectedIndex);
 
             //Record the current position selected in the list.
-            handler.setCurrentSelectedItem(referencesList.SelectedIndex);
+            handler.setCurrentSelectedItem(referencesList.SelectedIndex, bDisplayOption.SelectedIndex);
         }
 
 

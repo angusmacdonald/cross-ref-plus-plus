@@ -64,6 +64,14 @@ namespace CrossReferencePlus
         }
 
 
+       
+
+        private void referencesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
         private void bNumbering_Click(object sender, EventArgs e)
         {
             handler.ReferenceType = WdReferenceType.wdRefTypeNumberedItem;
@@ -87,5 +95,6 @@ namespace CrossReferencePlus
             handler.ReferenceType = WdReferenceType.wdRefTypeHeading;
             refreshReferenceList();
         }
+
     }
 }

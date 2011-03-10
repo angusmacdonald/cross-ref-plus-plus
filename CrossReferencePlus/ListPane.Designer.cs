@@ -46,14 +46,16 @@
             // 
             // layoutManager
             // 
+            this.layoutManager.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.layoutManager.Controls.Add(this.buttonContainer);
             this.layoutManager.Controls.Add(this.bDisplayOption);
             this.layoutManager.Controls.Add(this.referencesList);
             this.layoutManager.Controls.Add(this.bAddCrossReference);
-            this.layoutManager.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutManager.Location = new System.Drawing.Point(0, 0);
             this.layoutManager.Name = "layoutManager";
-            this.layoutManager.Size = new System.Drawing.Size(220, 714);
+            this.layoutManager.Size = new System.Drawing.Size(235, 714);
             this.layoutManager.TabIndex = 4;
             // 
             // buttonContainer
@@ -125,29 +127,33 @@
             // 
             // bDisplayOption
             // 
-            this.bDisplayOption.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bDisplayOption.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.bDisplayOption.FormattingEnabled = true;
             this.bDisplayOption.Location = new System.Drawing.Point(3, 62);
             this.bDisplayOption.Name = "bDisplayOption";
-            this.bDisplayOption.Size = new System.Drawing.Size(211, 95);
+            this.bDisplayOption.Size = new System.Drawing.Size(229, 95);
             this.bDisplayOption.TabIndex = 1;
             // 
             // referencesList
             // 
-            this.referencesList.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.referencesList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.referencesList.FormattingEnabled = true;
             this.referencesList.Location = new System.Drawing.Point(3, 163);
             this.referencesList.Name = "referencesList";
-            this.referencesList.Size = new System.Drawing.Size(211, 511);
+            this.referencesList.Size = new System.Drawing.Size(229, 511);
             this.referencesList.TabIndex = 0;
+            this.referencesList.SelectedIndexChanged += new System.EventHandler(this.referencesList_SelectedIndexChanged);
             // 
             // bAddCrossReference
             // 
-            this.bAddCrossReference.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bAddCrossReference.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.bAddCrossReference.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.bAddCrossReference.Location = new System.Drawing.Point(3, 680);
             this.bAddCrossReference.Name = "bAddCrossReference";
-            this.bAddCrossReference.Size = new System.Drawing.Size(213, 27);
+            this.bAddCrossReference.Size = new System.Drawing.Size(229, 27);
             this.bAddCrossReference.TabIndex = 3;
             this.bAddCrossReference.Text = "Add Cross-Reference";
             this.bAddCrossReference.UseVisualStyleBackColor = true;
@@ -159,7 +165,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutManager);
             this.Name = "ListPane";
-            this.Size = new System.Drawing.Size(220, 714);
+            this.Size = new System.Drawing.Size(235, 714);
             this.layoutManager.ResumeLayout(false);
             this.buttonContainer.Panel1.ResumeLayout(false);
             this.buttonContainer.Panel2.ResumeLayout(false);

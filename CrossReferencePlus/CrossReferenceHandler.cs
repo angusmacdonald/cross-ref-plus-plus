@@ -48,6 +48,17 @@ namespace CrossReferencePlus
         /// </summary>
         Array currentCrossReferenceItems;
 
+        /// <summary>
+        /// Records the last position selected in the list of references.
+        /// 
+        /// e.g. the user has selected 'figures' and has 'figure 10' selected. If they switch away to 'tables' and then go back, the item
+        /// selected will still be figure 10.
+        /// 
+        /// Key: The current reference type (whatever the contents of 'referenceType' are.
+        /// Value: position in currentCrossReferenceItems array.
+        /// </summary>
+        Dictionary<object, int> positionHistory = new Dictionary<object, int>();
+
         public CrossReferenceHandler()
         {
             // Reference to current document.
@@ -176,6 +187,31 @@ namespace CrossReferencePlus
         private bool isACaptionedType()
         {
             return referenceType.Equals("Figure") || referenceType.Equals("Table") || referenceType.Equals("Equation");
+        }
+
+        internal void setCurrentSelectedItem(int index)
+        {
+            positionHistory.Remove(referenceType);
+            positionHistory.Add(referenceType, index);
+        }
+
+        /// <summary>
+        /// Get the index of the item previously selected for this type of reference.
+        /// 
+        /// E.g. if figure 23 was selected before for the 'figures' reference type, figure 23 should be selected again.
+        /// </summary>
+        /// <returns></returns>
+        internal int getPreviouslySelectedIndex()
+        {
+            if (positionHistory.ContainsKey(referenceType))
+            {
+                return positionHistory[referenceType];
+            }
+            else
+            {
+                return -1;
+            }
+
         }
     }
 }

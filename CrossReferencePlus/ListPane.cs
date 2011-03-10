@@ -30,24 +30,63 @@ namespace CrossReferencePlus
         {
           
             //Add new references to listpane, after clearing old set.
-            referencesList.Items.Clear();
-            Array references = handler.getCrossReferences();
 
-            foreach (String reference in references)
-            {
-                referencesList.Items.Add(reference);
-            }
+            clearOldReferences();
+            addNewReferences();
 
+            setIndexToPrevious();
+
+            updateDisplayOptions();
+
+        }
+
+        private void updateDisplayOptions()
+        {
             //Update the list of display options, after clearing old set.
-            bDisplayOption.Items.Clear();
+
             List<String> displayOptions = handler.getDisplayOptions();
 
             foreach (String displayOption in displayOptions)
             {
                 bDisplayOption.Items.Add(displayOption);
             }
+        }
 
-            bDisplayOption.SelectedIndex = 0;
+        private void addNewReferences()
+        {
+            
+            Array references = handler.getCrossReferences();
+
+            foreach (String reference in references)
+            {
+                referencesList.Items.Add(reference);
+            }
+        }
+
+        private void clearOldReferences()
+        {
+            referencesList.Items.Clear();
+            bDisplayOption.Items.Clear();
+        }
+
+        private void setIndexToPrevious()
+        {
+            if (referencesList.Items.Count > 0)
+            {
+            
+                //Set index to its previous position if still valid.
+                int previousIndex = handler.getPreviouslySelectedIndex();
+
+                int indexToUse = 0;
+
+                if (previousIndex > 0 && previousIndex < referencesList.Items.Count)
+                {
+                    indexToUse = previousIndex;
+                }
+
+            
+                referencesList.SetSelected(indexToUse, true);
+            }
         }
 
         private void bAddCrossReference_Click(object sender, EventArgs e)
@@ -61,6 +100,9 @@ namespace CrossReferencePlus
 
 
             handler.addCrossReference(referencesList.SelectedIndex);
+
+            //Record the current position selected in the list.
+            handler.setCurrentSelectedItem(referencesList.SelectedIndex);
         }
 
 
@@ -68,7 +110,7 @@ namespace CrossReferencePlus
 
         private void referencesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
 
 
@@ -95,6 +137,7 @@ namespace CrossReferencePlus
             handler.ReferenceType = WdReferenceType.wdRefTypeHeading;
             refreshReferenceList();
         }
+
 
     }
 }

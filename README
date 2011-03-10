@@ -2,4 +2,6 @@ A re-implementation of Word's cross-reference function, which allows you to add 
 
 This implementation is designed to be easier to use, by making various options easier to select, and allowing it to be displayed as a task pane rather than a pop-up window.
 
+How to use: the pane can be displayed by ticking the 'cross-ref view' option in the References Ribbon in Word 2010.
+
 Contact: Angus Macdonald (angus AT cs.st-andrews.ac.uk)

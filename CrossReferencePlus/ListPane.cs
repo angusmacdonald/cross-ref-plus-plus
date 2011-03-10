@@ -21,6 +21,8 @@ namespace CrossReferencePlus
         {
             InitializeComponent();
             refreshReferenceList();
+
+            referencesList.DoubleClick += new EventHandler(referencesList_DoubleClick);
         }
 
         /// <summary>
@@ -111,6 +113,22 @@ namespace CrossReferencePlus
 
         private void bAddCrossReference_Click(object sender, EventArgs e)
         {
+            addCrossReferenceToDocument();
+        }
+
+        private void referencesList_DoubleClick(object sender, EventArgs e)
+        {
+
+            if (referencesList.SelectedItem != null)
+            {
+                addCrossReferenceToDocument();
+            }
+
+        }
+
+
+        private void addCrossReferenceToDocument()
+        {
             //Set display option if set
 
             if (bDisplayOption.SelectedIndex > -1)
@@ -125,8 +143,7 @@ namespace CrossReferencePlus
             handler.setCurrentSelectedItem(referencesList.SelectedIndex, bDisplayOption.SelectedIndex);
         }
 
-
-       
+ 
 
         private void referencesList_SelectedIndexChanged(object sender, EventArgs e)
         {

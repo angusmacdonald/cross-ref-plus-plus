@@ -36,27 +36,30 @@
         {
             this.crossReference = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.getCrossReferences = this.Factory.CreateRibbonButton();
+            this.tbViewPanel = this.Factory.CreateRibbonCheckBox();
             this.crossReference.SuspendLayout();
             this.group1.SuspendLayout();
             // 
             // crossReference
             // 
             this.crossReference.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
+            this.crossReference.ControlId.OfficeId = "TabReferences";
             this.crossReference.Groups.Add(this.group1);
-            this.crossReference.Label = "TabAddIns";
+            this.crossReference.Label = "TabReferences";
             this.crossReference.Name = "crossReference";
             // 
             // group1
             // 
-            this.group1.Items.Add(this.getCrossReferences);
-            this.group1.Label = "Cross-Reference Tools";
+            this.group1.Items.Add(this.tbViewPanel);
+            this.group1.Label = "Cross-Ref Plus";
             this.group1.Name = "group1";
             // 
-            // getCrossReferences
+            // tbViewPanel
             // 
-            this.getCrossReferences.Label = "Get Cross-References";
-            this.getCrossReferences.Name = "getCrossReferences";
+            this.tbViewPanel.Label = "Cross-Ref View";
+            this.tbViewPanel.Name = "tbViewPanel";
+            this.tbViewPanel.ScreenTip = "Display the cross-reference plus panel.";
+            this.tbViewPanel.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.tbViewPanel_Click);
             // 
             // CrossReferenceRibbon
             // 
@@ -75,7 +78,7 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab crossReference;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton getCrossReferences;
+        internal Microsoft.Office.Tools.Ribbon.RibbonCheckBox tbViewPanel;
     }
 
     partial class ThisRibbonCollection

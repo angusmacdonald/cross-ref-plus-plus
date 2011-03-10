@@ -121,8 +121,8 @@ namespace CrossReferencePlus
                 listOfOptionsAsString.Add("Number No Context");
                 listOfOptions.Add(WdReferenceKind.wdNumberFullContext);
                 listOfOptionsAsString.Add("Number Full Context");
-                listOfOptions.Add(WdReferenceKind.wdNumberRelativeContext);
-                listOfOptionsAsString.Add("Number Relative Context");
+                //listOfOptions.Add(WdReferenceKind.wdNumberRelativeContext);
+                //listOfOptionsAsString.Add("Number Relative Context");
             }
             
             //Only endnotes.
@@ -146,7 +146,7 @@ namespace CrossReferencePlus
             //All
             listOfOptions.Add(WdReferenceKind.wdPageNumber);
             listOfOptionsAsString.Add("Page Number");
-           listOfOptions.Add(WdReferenceKind.wdContentText);
+            listOfOptions.Add(WdReferenceKind.wdContentText);
             listOfOptionsAsString.Add("Content Text");
             listOfOptions.Add(WdReferenceKind.wdPosition);
             listOfOptionsAsString.Add("Position");
@@ -175,7 +175,7 @@ namespace CrossReferencePlus
         /// <returns></returns>
         private bool isACaptionedType()
         {
-        return referenceType.Equals("Figure") || referenceType.Equals("Table") || referenceType.Equals("Equation");
+            return referenceType.Equals("Figure") || referenceType.Equals("Table") || referenceType.Equals("Equation");
         }
     }
 }

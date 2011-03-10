@@ -224,7 +224,7 @@ namespace CrossReferencePlus
             listOfOptions.Add(WdReferenceKind.wdPageNumber);
             listOfOptionsAsString.Add("Page Number");
             listOfOptions.Add(WdReferenceKind.wdPosition);
-            listOfOptionsAsString.Add("Position");
+            listOfOptionsAsString.Add("Position (above/below)");
 
             return listOfOptionsAsString;
         }

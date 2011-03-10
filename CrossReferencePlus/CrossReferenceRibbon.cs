@@ -13,7 +13,7 @@ namespace CrossReferencePlus
         private ListPane listPane;
         private static Microsoft.Office.Tools.CustomTaskPane customTaskPane;
 
-        Microsoft.Office.Core.MsoCTPDockPosition lastDocPosition = Microsoft.Office.Core.MsoCTPDockPosition.msoCTPDockPositionRight;
+      //  Microsoft.Office.Core.MsoCTPDockPosition lastDocPosition = Microsoft.Office.Core.MsoCTPDockPosition.msoCTPDockPositionRight;
 
 
         private void CrossReferenceRibbon_Load(object sender, RibbonUIEventArgs e)

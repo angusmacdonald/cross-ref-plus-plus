@@ -32,6 +32,7 @@ namespace CrossReferencePlus
             //Add new references to listpane, after clearing old set.
 
             clearOldReferences();
+            
             addNewReferences();
 
             setIndexToPrevious();
